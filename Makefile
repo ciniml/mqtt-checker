@@ -3,7 +3,12 @@
 APP_NAME := mqtt-checker
 SRCS := main.go go.mod
 
-all: dist/linux-amd64/$(APP_NAME) dist/linux-i386/$(APP_NAME) dist/windows/$(APP_NAME) dist/macos/$(APP_NAME)
+all: dist/linux-amd64/$(APP_NAME) \
+     dist/linux-i386/$(APP_NAME) \
+     dist/linux-arm/$(APP_NAME) \
+     dist/linux-arm64/$(APP_NAME) \
+	 dist/windows/$(APP_NAME) \
+	 dist/macos/$(APP_NAME)
 
 dist/linux-amd64/$(APP_NAME): $(SRCS)
 	mkdir -p $(dir $@)
@@ -11,6 +16,12 @@ dist/linux-amd64/$(APP_NAME): $(SRCS)
 dist/linux-i386/$(APP_NAME): $(SRCS)
 	mkdir -p $(dir $@)
 	cd $(dir $@); GOOS=linux GOARCH=386 go build ../..
+dist/linux-arm/$(APP_NAME): $(SRCS)
+	mkdir -p $(dir $@)
+	cd $(dir $@); GOOS=linux GOARCH=arm go build ../..
+dist/linux-arm64/$(APP_NAME): $(SRCS)
+	mkdir -p $(dir $@)
+	cd $(dir $@); GOOS=linux GOARCH=arm64 go build ../..
 dist/windows/$(APP_NAME): $(SRCS)
 	mkdir -p $(dir $@)
 	cd $(dir $@); GOOS=windows GOARCH=386 go build ../..
