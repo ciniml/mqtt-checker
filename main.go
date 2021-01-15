@@ -1,3 +1,7 @@
+// MQTT connection checker
+// Author: Kenta IDA (fuga@fugafuga.org)
+// License: Boost Software License 1.0
+
 package main
 
 import (
